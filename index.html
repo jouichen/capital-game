@@ -2,7 +2,7 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-select=no">
     <title>🌍 環球首都特訓班 - 獨立挑戰版</title>
     <style>
         * {
@@ -13,8 +13,8 @@
         
         body {
             margin: 0;
-            padding: 20px;
-            background-color: #eef2f7; /* 海洋輕藍色 */
+            padding: 10px;
+            background-color: #eef2f7; 
             display: flex;
             justify-content: center;
             align-items: center;
@@ -24,9 +24,9 @@
         #game-container {
             background-color: #ffffff;
             width: 100%;
-            max-width: 480px;
+            max-width: 450px;
             border-radius: 24px;
-            padding: 24px;
+            padding: 16px;
             box-shadow: 0 12px 36px rgba(15, 23, 42, 0.08);
             border: 1px solid #e2e8f0;
             position: relative;
@@ -42,21 +42,21 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 8px;
+            padding: 0 4px;
         }
 
         #instruction {
-            font-size: 20px;
+            font-size: 16px;
             font-weight: bold;
             color: #0f172a;
-            margin: 16px 0;
-            min-height: 65px;
+            margin: 10px 0;
+            min-height: 55px;
             display: flex;
             justify-content: center;
             align-items: center;
             background-color: #f1f5f9;
-            border-radius: 16px;
-            padding: 12px;
+            border-radius: 14px;
+            padding: 8px 12px;
             border: 1px dashed #cbd5e1;
             line-height: 1.4;
         }
@@ -66,7 +66,7 @@
             height: 8px;
             background-color: #e2e8f0;
             border-radius: 4px;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
             overflow: hidden;
             display: none;
         }
@@ -74,7 +74,7 @@
         #timer-bar {
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, #3b82f6, #1d4ed8); /* 科技藍條 */
+            background: linear-gradient(90deg, #3b82f6, #1d4ed8);
             transition: width 0.1s linear;
         }
 
@@ -87,10 +87,10 @@
             border: 1px solid #e2e8f0;
             background-image: radial-gradient(#94a3b8 1px, transparent 1px);
             background-size: 20px 20px;
+            overflow: hidden; /* 防止字體隨機到太邊緣時撐開網頁 */
         }
 
-        /* 頂層主選單 */
-        #menu-overlay {
+        #menu-overlay, #sub-menu-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             background-color: #ffffff;
@@ -98,84 +98,70 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 16px;
             z-index: 10;
         }
 
-        /* 區域選擇選單 */
         #sub-menu-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
             background-color: rgba(255, 255, 255, 0.98);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
             z-index: 11;
         }
 
         h3 {
             margin-top: 0;
             color: #0f172a;
-            font-size: 22px;
-            margin-bottom: 20px;
+            font-size: 20px;
+            margin-bottom: 16px;
         }
 
         .mode-btn {
-            width: 85%;
-            padding: 14px 20px;
-            margin: 8px 0;
+            width: 90%;
+            padding: 12px 16px;
+            margin: 6px 0;
             border: none;
-            border-radius: 16px;
+            border-radius: 14px;
             color: white;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: bold;
             cursor: pointer;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             transition: all 0.2s ease;
         }
 
-        .mode-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-        }
-
-        .btn-toddler { background-color: #475569; } /* 經典鐵灰藍 */
-        .btn-child   { background-color: #2563eb; } /* 挑戰皇家藍 */
-        .btn-senior  { background-color: #0d9488; } /* 懷舊樂活綠 */
+        .btn-toddler { background-color: #475569; }
+        .btn-child   { background-color: #2563eb; }
+        .btn-senior  { background-color: #0d9488; }
 
         .back-btn {
-            margin-top: 16px;
+            margin-top: 14px;
             background-color: #64748b;
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 12px;
+            padding: 8px 16px;
+            border-radius: 10px;
             font-weight: bold;
             cursor: pointer;
+            font-size: 14px;
         }
 
-        /* 🏠 回首頁按鈕 */
         #home-btn {
             position: absolute;
-            top: 12px;
-            right: 12px;
+            top: 8px;
+            right: 8px;
             z-index: 15;
             background: rgba(255, 255, 255, 0.9);
             border: 1px solid #cbd5e1;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            font-size: 18px;
+            width: 36px;
+            height: 36px;
+            font-size: 16px;
             cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
 
-        /* 飛出的城市膠囊 */
+        /* 📱 核心修正：手機專用彈性膠囊（防爆框、防遮擋） */
         #game-object {
             position: absolute;
             display: none;
@@ -183,18 +169,23 @@
             user-select: none;
             font-weight: bold;
             background: white;
-            padding: 12px 18px;
-            border-radius: 50px;
-            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.15);
+            padding: 10px 14px;
+            border-radius: 30px;
+            box-shadow: 0 6px 20px rgba(15, 23, 42, 0.15);
             border: 2px solid #3b82f6;
             color: #0f172a;
-            white-space: nowrap;
+            
+            /* 以下屬性確保文字在任何手機都不會爆框 */
+            max-width: 90%; 
+            white-space: nowrap; 
+            overflow: hidden;
+            text-overflow: ellipsis;
+            box-sizing: border-box;
         }
 
-        /* 分數動畫 */
         .floating-text {
             position: absolute;
-            font-size: 26px;
+            font-size: 24px;
             font-weight: bold;
             animation: floatUp 0.8s ease-out forwards;
             pointer-events: none;
@@ -206,18 +197,18 @@
 
         @keyframes floatUp {
             0% { transform: translateY(0) scale(0.8); opacity: 1; }
-            100% { transform: translateY(-45px) scale(1.2); opacity: 0; }
+            100% { transform: translateY(-40px) scale(1.1); opacity: 0; }
         }
 
         #restart-btn {
-            margin-top: 15px;
-            padding: 12px 28px;
-            font-size: 16px;
+            margin-top: 12px;
+            padding: 10px 24px;
+            font-size: 15px;
             font-weight: bold;
             background-color: #2563eb;
             color: white;
             border: none;
-            border-radius: 14px;
+            border-radius: 12px;
             cursor: pointer;
         }
     </style>
@@ -226,7 +217,7 @@
     <div id="game-container">
         <div id="score-board">
             <div>得分: <span id="score">0</span></div>
-            <div id="level-indicator" style="font-size: 13px; color: #ef4444; font-weight: bold;"></div>
+            <div id="level-indicator" style="font-size: 12px; color: #ef4444; font-weight: bold;"></div>
         </div>
         <div id="instruction">🌍 環球首都特訓班 🌍</div>
         
@@ -244,7 +235,7 @@
             
             <div id="sub-menu-overlay" style="display:none;">
                 <h3 id="sub-menu-title">請選擇特訓區域</h3>
-                <div id="theme-buttons-container"></div>
+                <div id="theme-buttons-container" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
                 <button class="back-btn" onclick="showMenu()">⬅ 返回重選難度</button>
             </div>
             
